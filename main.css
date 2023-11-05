@@ -1,0 +1,37 @@
+.container-bg {
+   
+    margin: 20px;
+    padding: 5px;
+    float: none;
+
+  }
+
+  .card-bg {
+    background-color: #049db8;
+    margin: 20px;
+    padding: 10px;
+    font-size: 40px;
+
+
+  } 
+
+.taipy-button{
+    margin-top: 20px;
+    padding: 10px;
+  
+
+}
+
+
+
+.taipy-table{
+  margin: 20px;
+  padding: 10px;
+  border-color: #049db8;
+  border-radius: 3px;
+}
+
+
+.taipy-input{
+  margin-right: 50px;
+}
