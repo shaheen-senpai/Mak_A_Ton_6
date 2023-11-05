@@ -5,7 +5,7 @@ import openai
 from dotenv import load_dotenv
 import taipy as tp
 from taipy import Gui, Config
-from functions import get_primer,format_question,run_request,format_response
+from functions import get_primer,format_question,run_request,format_response_plt,format_response
 
 
 
@@ -144,9 +144,10 @@ def plot_graph(state) -> None:
         # Run the question
         answer=""
         answer = run_request(question_to_ask, "gpt-3.5-turbo", key=openai.api_key)
+        answer = format_response(answer)
         # the answer is the completed Python script so add to the beginning of the script to it.
         answer = primer2 + answer
-        answer = format_response(answer)
+        answer = format_response_plt(answer)
         answer = answer + "\nmy_plot = plt.gcf()\n" + "my_plot.savefig('my_plot1.png')\n"
         
         print(answer,"\n end")
@@ -164,12 +165,13 @@ def plot_graph(state) -> None:
 
         # exec(answer)  
         #sleep the program for 1 second to allow the file to be created
-        time.sleep(1)
+        time.sleep(5)
         state.figure = "my_plot1.png"       
         state.code = "generated_script.py"
         
         state.df = df
     except Exception as e:
+        state.question = "Error occurred. Please try again...!"
         if type(e) == openai.error.APIError:
             print("OpenAI API Error. Please try again a short time later. (" + str(e) + ")")
         elif type(e) == openai.error.Timeout:

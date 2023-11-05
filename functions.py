@@ -31,25 +31,37 @@ def get_primer(df_dataset,df_name):
 
 
 def format_question(primer_desc,primer_code , question):
-    # # Fill in the model_specific_instructions variable
-    # instructions = ""
-    # if model_type == "Code Llama":
-    #     # Code llama tends to misuse the "c" argument when creating scatter plots
-    #     instructions = "\nDo not use the 'c' argument in the plot function, use 'color' instead and only pass color names like 'green', 'red', 'blue'."
-    # primer_desc = primer_desc.format(instructions)  
-    
-    # Put the question at the end of the description primer within quotes, then add on the code primer.
     return  '"""\n' + primer_desc + question + '\n"""\n' + primer_code
 
 
 
-def format_response(res):
+def format_response_plt(res):
     # Check if 'plt.show()' exists in the response
     if "plt.show()" in res:
         # Remove the line with 'plt.show()'
         res = res.replace("plt.show()", "")
         # Remove any extra blank lines resulting from removal
         res = res.strip()
+    return res
+
+def format_response( res):
+    # Remove the load_csv from the answer if it exists
+    csv_line = res.find("read_csv")
+    if csv_line > 0:
+        return_before_csv_line = res[0:csv_line].rfind("\n")
+        if return_before_csv_line == -1:
+            # The read_csv line is the first line so there is nothing to need before it
+            res_before = ""
+        else:
+            res_before = res[0:return_before_csv_line]
+        res_after = res[csv_line:]
+        return_after_csv_line = res_after.find("\n")
+        if return_after_csv_line == -1:
+            # The read_csv is the last line
+            res_after = ""
+        else:
+            res_after = res_after[return_after_csv_line:]
+        res = res_before + res_after
     return res
 
 
