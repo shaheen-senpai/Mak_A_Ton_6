@@ -107,6 +107,7 @@ def plot_graph(state) -> None:
         time.sleep(1)
         state.figure = "my_plot1.png"       
         state.code = "generated_script.py"
+        
         state.df = df
     except Exception as e:
         if type(e) == openai.error.APIError:
