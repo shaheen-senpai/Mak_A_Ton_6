@@ -22,10 +22,10 @@ answer=""
 
 
 stylekit = {
-  
+  "color_background_light": "white",
   "font_family": "Times new roman",
-  "color_primary": "#049db8",
-  "color_secondary": "#049db8",
+  "color_primary": "#0F3A69",
+  "color_secondary": "#646266",
 
 }
 
@@ -38,7 +38,7 @@ Graphy_app = """
 <|card card-bg|
 
   <center>
-  **Taphy**
+  **VizScape**
   </center>
   
 |>
@@ -46,8 +46,8 @@ Graphy_app = """
 <|{path}|file_selector|label=Upload File|on_action=load_csv|extensions=.csv|drop_message=Drop Message|>
 
 <|
-<|{question}|input|class_name=fullwidth|>
-
+<|{question}|input|>
+<br/>
 <|Generate|button|on_action=plot_graph|>
 |>
 
@@ -62,9 +62,8 @@ Graphy_app = """
 
 <br/>
 
-<center>
 <|{figure}|image|width="700px"|>
-</center>
+
 
 
 
@@ -72,37 +71,6 @@ Graphy_app = """
 
 page2_md = """
 <|navbar|>
-
-<|card card-bg|
-
-  <center>
-  **Taphy**
-  </center>
-  
-|>
-<|part|class_name=m3|
-**Mission**       
-
-Our mission is to provide a user-friendly platform for data enthusiasts to explore and understand their datasets using advanced data visualization techniques.
-<br/>
-<br/>
-**What Sets Us Apart?**
-<br/>
-*Innovative Data Visualization*
-<br/>
- Our platform transforms raw data from .csv files into visually compelling charts, graphs, and dashboards that are both informative and user-friendly.
-<br/>
-<br/>
-*Seamless Integration with ChatGPT APIs*
-<br/>
-To enhance your data exploration experience, we've seamlessly integrated ChatGPT APIs into our platform. This integration allows you to interact with your data through natural language queries, receiving instant responses to help you gain deeper insights and ask complex questions.
-<br/>
-<br/>
-*User-Friendly Interface*
-<br/>
-Whether you're a seasoned data analyst or new to the world of data, our platform is designed for you. The user-friendly interface ensures that you can navigate the application effortlessly, making data visualisation a simple process!
-|>
-
 
 """
 
@@ -198,7 +166,7 @@ pages = {
     "About": page2_md
 }
 
-Gui(pages=pages).run(stylekit=stylekit)
+Gui(pages=pages).run(stylekit=stylekit,Dark_mode=False)
 
 # run the app
 #Gui(page=Graphy_app).run(title="Graph Generator")

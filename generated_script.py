@@ -4,31 +4,26 @@ fig,ax = plt.subplots(1,1,figsize=(12,10))
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False) 
 df=pd.read_csv("data.csv")
-# Filter the dataframe to only include the 'year' column
-year_df = df['year']
+# Filter the dataframe for the desired columns
+df_year = df['Year']
 
-# Group the values by year and count the occurrences
-year_counts = year_df.value_counts()
+# Count the number of occurrences for each year
+year_counts = df_year.value_counts()
 
-# Get the labels and sizes for the pie chart
-labels = year_counts.index.tolist()
-sizes = year_counts.values.tolist()
+# Generate a pie chart of the year counts
+ax.pie(year_counts, labels=year_counts.index, autopct='%1.1f%%')
 
-# Create the pie chart
-plt.pie(sizes, labels=labels, startangle=90, autopct='%1.1f%%')
-plt.axis('equal')
+# Add title and labels
+ax.set_title("Distribution of Years")
+ax.set_xlabel("Year")
 
-# Set the title and labels
-plt.title('Distribution of Years')
-plt.xlabel('Year')
+# Remove empty figure supertitle
+fig.suptitle("")
 
-# Set the x and y axes labels
-plt.xlabel('Year')
-plt.ylabel('Percentage')
+# Adjust layout
+fig.tight_layout()
 
-# Remove the figure suptitle
-fig.suptitle('')
-
-# Show the graph
+# Save the figure as a PNG file
+plt.savefig("year_pie_chart.png")
 my_plot = plt.gcf()
 my_plot.savefig('my_plot1.png')
