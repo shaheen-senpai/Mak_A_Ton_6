@@ -19,9 +19,9 @@ def get_primer(df_dataset,df_name):
             primer_desc = primer_desc + "\nThe column '" + i + "' is type " + str(df_dataset.dtypes[i]) + " and contains numeric values. "   
     primer_desc = primer_desc + "\nLabel the x and y axes appropriately."
     primer_desc = primer_desc + "\nAdd a title. Set the fig suptitle as empty."
-    primer_desc = primer_desc + "\nNO Need for plt.show() function omit it." # Space for additional instructions if needed
+    primer_desc = primer_desc + "\nonly use plot and dont add multi line comments.\n Also add any ML modules needed if neccessary" # Space for additional instructions if needed
     primer_desc = primer_desc + "\nUsing Python version 3.9.12, create a script using the dataframe df to graph the following: "
-    pimer_code = "import pandas as pd\nimport matplotlib.pyplot as plt\n"
+    pimer_code = "import pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n"
     pimer_code = pimer_code + "fig,ax = plt.subplots(1,1,figsize=(12,10))\n"
     pimer_code = pimer_code + "ax.spines['top'].set_visible(False)\nax.spines['right'].set_visible(False) \n"
     pimer_code = pimer_code + "df=" + "pd.read_csv(\"data.csv\")\n"

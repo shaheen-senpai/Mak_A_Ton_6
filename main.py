@@ -165,7 +165,7 @@ def plot_graph(state) -> None:
 
         # exec(answer)  
         #sleep the program for 1 second to allow the file to be created
-        time.sleep(5)
+        time.sleep(4)
         state.figure = "my_plot1.png"       
         state.code = "generated_script.py"
         
@@ -174,20 +174,28 @@ def plot_graph(state) -> None:
         state.question = "Error occurred. Please try again...!"
         if type(e) == openai.error.APIError:
             print("OpenAI API Error. Please try again a short time later. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.Timeout:
             print("OpenAI API Error. Your request timed out. Please try again a short time later. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.RateLimitError:
             print("OpenAI API Error. You have exceeded your assigned rate limit. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.APIConnectionError:
             print("OpenAI API Error. Error connecting to services. Please check your network/proxy/firewall settings. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.InvalidRequestError:
             print("OpenAI API Error. Your request was malformed or missing required parameters. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.AuthenticationError:
             print("Please enter a valid OpenAI API Key. (" + str(e) + ")")
+            state.question = "Error occurred. Please try again...!"
         elif type(e) == openai.error.ServiceUnavailableError:
-            print("OpenAI Service is currently unavailable. Please try again a short time later. (" + str(e) + ")")               
+            print("OpenAI Service is currently unavailable. Please try again a short time later. (" + str(e) + ")")   
+            state.question = "Error occurred. Please try again...!"            
         else:
             print("Unfortunately the code generated from the model contained errors and was unable to execute.")
+            state.question = "Error occurred. Please try again...!"
 
         
 
@@ -201,7 +209,7 @@ pages = {
     "About": page2_md
 }
 
-Gui(pages=pages).run(stylekit=stylekit)
+Gui(pages=pages).run(title="Graph Generator" , stylekit=stylekit, debug = True)
 
 # run the app
 #Gui(page=Graphy_app).run(title="Graph Generator")
